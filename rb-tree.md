@@ -2,25 +2,25 @@
 
 ## Regras
 
-### 1 Todo nó é preto ou vermelho
+**1.** Todo nó é preto ou vermelho
 
-### 2 Raiz é sempre preta
+**2.** Raiz é sempre preta
 
-### 3 Toda folha Null é preto
+**3.** Toda folha Null é preto
 
-### 4 Todo caminho de raiz-folha tem o mesmo número de nós PRETOS
+**4.** Todo caminho de raiz-folha tem o mesmo número de nós PRETOS
 
-### 5 Nenhum caminho pode ter dois nós VERMELHOS consecutivos (se um nó é vermelho, os filhos são pretos)
+**5.** Nenhum caminho pode ter dois nós VERMELHOS consecutivos (se um nó é vermelho, os filhos são pretos)
 
 ## Inserção
 
-### - Novas inserções são sempre vermelhas
+- Novas inserções são sempre vermelhas
 
 ## Rebalanceamento
 
-### 1 Tio Preto -> rotaciona
+**1.** Tio Preto -> rotaciona
 
-### 2 Tio Vermelho -> troca de cor
+**2.** Tio Vermelho -> troca de cor
 
 ## Exemplos
 
@@ -132,7 +132,7 @@ Para corrigir essa violação, leva-se em conta que (nil), filho de (7) e o tio 
 ```
               3(b)
    1(b)                   6(r)
-nil    nil          5(b)          8(r)
+nil    nil          5(b)           8(r)
                (nil)    (nil)  7(b)    9(r)
 ```
 
@@ -143,10 +143,56 @@ Deve-se reordenar a cor dos nós, segundo a regra 5. O pai é preto e os filhos 
 ```
               3(b)
    1(b)                  6(r)
-nil    nil          5(b)        8(b)
-                            7(r)    9(r)
+nil    nil          5(b)           8(b)
+                               7(r)    9(r)
 ```
 
 - A árvore obedece todas as regras e o processo de inserção é finalizado.
 
-###
+### Exemplo 5 - Inserção de 10
+
+Este exemplo trata de uma inserção na árvore do Exemplo 3. Inserindo o **valor 10**, tem-se:
+
+```
+              3(b)
+   1(b)                  6(r)
+nil    nil          5(b)           8(b)
+                              7(r)      9(r)
+                                            10(r)
+```
+
+- Violação da regra 5
+
+Para ordenar a árvore, deve-se fazer uma reordenação de cores visto que o tio, (7) de (10) é vermelho.
+
+```
+              3(b)
+   1(b)                      6(r)
+nil    nil           5(b)            8(r)
+                                 7(b)    9(b)
+                                            10(r)
+```
+
+- Reordenação de cores feita, mas (6) e (8) agora infringem a regra 5.
+
+Para corrigir esta violação, é necessario observar que o tio de (8) é preto. Logo, deve-se fazer uma rotação à esquerda.
+
+```
+               6(r)
+    3(b)                    8(r)
+1(b)    5(b)          7(b)        9(b)
+                                       10(r)
+```
+
+- Violação da regra 2.
+
+Deve-se recolorir o nó raiz. O pai é preto e os filhos, vermelhos.
+
+```
+               6(b)
+    3(r)                    8(r)
+1(b)    5(b)          7(b)        9(b)
+                                       10(r)
+```
+
+- Nenhuma regra violada, final do processo de inserção.
